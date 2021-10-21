@@ -6,14 +6,28 @@ Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
 
 ## Installation
 
-- [ ] `Developer TODO:` Update the below as needed to correctly describe the install procedure. For instance, if you do not have a PyPi repo, or if you want users to directly install from your git repo, you can modify this step as appropriate.
-
 ```bash
 pipx install tap-openweathermap
 ```
 
 ## Configuration
 
+```bash
+TAP_OPENWEATHERMAP_API_KEY=1234567890
+TAP_OPENWEATHERMAP_CURRENT_WEATHER_CITY_NAME=london
+TAP_OPENWEATHERMAP_FORECAST_WEATHER_LONGITUDE=-0.1257
+TAP_OPENWEATHERMAP_FORECAST_WEATHER_LATTITUDE=51.5085
+```
+
+`api_key` is required for authentication, see the "Source Authentication and Authorization" section for how to get one.
+`current_weather_city_name` is required, and the api will return current weather data for the supplied city name.
+
+`forecast_weather_longitude` is optional, you need to provide this to get forecast data.
+`forecast_weather_lattitude` is optional, you need to provide this to get forecast data.
+
+You can get the longitude and lattitude of a city by requesting its current weather, setting the city name to the ``current_weather_city_name` setting.
+The longitude and lattidue will be returned as part of the curren
+ 
 ### Accepted Config Options
 
 - [ ] `Developer TODO:` Provide a list of config options accepted by the tap.
@@ -27,8 +41,11 @@ tap-openweathermap --about
 
 ### Source Authentication and Authorization
 
-- [ ] `Developer TODO:` If your tap requires special access on the source system, or any special authentication requirements, provide those here.
+To use this tap you require an API key from [https://openweathermap.org/])(https://openweathermap.org/). 
 
+Sign up for a free account and under your profile you will find your default API Key.
+
+The API Key is required to be passed as a parameter to the API the authenticate your request.
 
 ## Usage
 
