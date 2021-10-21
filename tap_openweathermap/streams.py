@@ -55,9 +55,6 @@ class _CurrentWeatherStream(_SyncedAtStream):
         params["q"] = self.config.get("current_weather_city_name")
         params["appid"] = self.config.get("api_key")
 
-        self.logger.info("sfhsfuihsduisiofshduffjdisdfsjsiofdjidosj")
-        self.logger.info(self.config)
-
         return params
 
 
