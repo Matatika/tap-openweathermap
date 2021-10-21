@@ -21,11 +21,14 @@ TAP_OPENWEATHERMAP_FORECAST_WEATHER_LATTITUDE=51.5085
 ```
 
 `api_key` is required for authentication, see the "Source Authentication and Authorization" section for how to get one.
+
 `current_weather_city_name` is required, and the api will return current weather data for the supplied city name.
+
 `forecast_weather_longitude` is required, you need to provide this to get forecast data.
+
 `forecast_weather_lattitude` is required, you need to provide this to get forecast data.
 
-You can get the longitude and lattitude of a city by requesting its current weather, setting the city name to the ``current_weather_city_name` setting.
+You can get the longitude and lattitude of a city by requesting its current weather, setting the city name to the `current_weather_city_name` setting.
 The longitude and lattidue will be returned as part of the current_weather_stream. To get the values for your first call just google "city_name" coords.
  
 ### Accepted Config Options
