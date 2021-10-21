@@ -35,11 +35,13 @@ class TapOpenWeatherMap(Tap):
         th.Property(
             "forecast_weather_longitude",
             th.StringType,
+            required=True,
             description="Longitude of city to get forecast for"
         ),
         th.Property(
             "forecast_weather_lattitude",
             th.StringType,
+            required=True,
             description="Lattitude of city to get forecast for"
         ),
     ).to_dict()
