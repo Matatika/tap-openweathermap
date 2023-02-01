@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tap-openweathermap"
-version = "0.0.1"
+version = "0.1.0"
 description = "`tap-openweathermap` is a Singer tap for OpenWeatherMap, built with the Meltano SDK for Singer Taps."
 authors = ["Daniel Walker"]
 keywords = [
@@ -10,9 +10,9 @@ keywords = [
 license = "Apache 2.0"
 
 [tool.poetry.dependencies]
-python = "<3.10,>=3.6.2"
+python = "<3.12,>=3.7.0"
 requests = "^2.25.1"
-singer-sdk = "^0.3.11"
+singer-sdk = "^0.18.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
