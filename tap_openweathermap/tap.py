@@ -6,13 +6,11 @@ from singer_sdk import Tap, Stream
 from singer_sdk import typing as th  # JSON schema typing helpers
 
 from tap_openweathermap.streams import (
-    CurrentWeatherStream,
-    ForecastWeatherStream,
+    WeatherStream,
 )
 
 STREAM_TYPES = [
-    CurrentWeatherStream,
-    ForecastWeatherStream,
+    WeatherStream,
 ]
 
 class TapOpenWeatherMap(Tap):
@@ -25,12 +23,6 @@ class TapOpenWeatherMap(Tap):
             th.StringType,
             required=True,
             description="API Key is a required parameter to query the api endpoints"
-        ),
-        th.Property(
-            "current_weather_city_name",
-            th.StringType,
-            required=True,
-            description="City name that you want to get weather for"
         ),
         th.Property(
             "forecast_weather_longitude",
