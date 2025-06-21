@@ -25,13 +25,13 @@ class TapOpenWeatherMap(Tap):
             description="API Key is a required parameter to query the api endpoints"
         ),
         th.Property(
-            "forecast_weather_longitude",
+            "weather_longitude",
             th.StringType,
             required=True,
             description="Longitude of city to get forecast for"
         ),
         th.Property(
-            "forecast_weather_lattitude",
+            "weather_lattitude",
             th.StringType,
             required=True,
             description="Lattitude of city to get forecast for"
