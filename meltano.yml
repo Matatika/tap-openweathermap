@@ -13,9 +13,8 @@ plugins:
     settings:
     - name: api_key
       kind: password
-    - name: current_weather_city_name
-    - name: forecast_weather_longitude
-    - name: forecast_weather_lattitude
+    - name: weather_longitude
+    - name: weather_lattitude
   loaders:
   - name: target-jsonl
     variant: andyh1203
