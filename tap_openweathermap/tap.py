@@ -7,12 +7,12 @@ from singer_sdk import typing as th  # JSON schema typing helpers
 
 from tap_openweathermap.streams import (
     CurrentWeatherStream,
-    WeatherStream,
+    ForecastWeatherStream,
 )
 
 STREAM_TYPES = [
     CurrentWeatherStream,
-    WeatherStream,
+    ForecastWeatherStream,
 ]
 
 class TapOpenWeatherMap(Tap):
