@@ -3,6 +3,7 @@ from singer_sdk.typing import (
     Property,
     ArrayType,
     NumberType,
+    StringType,
 )
 
 from tap_openweathermap.schemas.utils.custom_object import CustomObject
@@ -88,6 +89,7 @@ class ForecastDailyObject(CustomObject):
         Property("moonrise", NumberType),
         Property("moonset", NumberType),
         Property("moonphase", NumberType),
+        Property("summary", StringType),
         Property("temp", ForecastTempObject),
         Property("feels_like", ForecastFeelsLikeObject),
         Property("pressure", NumberType),
