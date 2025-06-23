@@ -104,7 +104,7 @@ class ForecastWeatherStream(_ForcastWeatherStream):
     url_base = "https://api.openweathermap.org/data/3.0"
     name = "forecast_stream"
     path = "/onecall"
-
+    extra_retry_statuses = ()
     schema = PropertiesList(
         Property("synced_at", DateTimeType),
         Property("lat", NumberType),
@@ -116,3 +116,11 @@ class ForecastWeatherStream(_ForcastWeatherStream):
         Property("hourly", ForecastHourlyObject),
         Property("daily", ForecastDailyObject)
     ).to_dict()
+
+    def response_error_message(self, response):
+        return "\n".join(
+            (
+                super().response_error_message(response),
+                response.json()["message"],
+            )
+        )
