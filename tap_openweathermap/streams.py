@@ -52,8 +52,8 @@ class _CurrentWeatherStream(_SyncedAtStream):
         self, context: Optional[dict], next_page_token: Optional[Any]
     ) -> Dict[str, Any]:
         params = super().get_url_params(context, next_page_token)
-        params["q"] = self.config.get("current_weather_city_name")
-        params["appid"] = self.config.get("api_key")
+        params["q"] = self.config["current_weather_city_name"]
+        params["appid"] = self.config["api_key"]
 
         return params
 
@@ -65,9 +65,9 @@ class _ForcastWeatherStream(_SyncedAtStream):
         self, context: Optional[dict], next_page_token: Optional[Any]
     ) -> Dict[str, Any]:
         params = super().get_url_params(context, next_page_token)
-        params["lat"] = self.config.get("forecast_weather_lattitude")
-        params["lon"] = self.config.get("forecast_weather_longitude")
-        params["appid"] = self.config.get("api_key")
+        params["lat"] = self.config["forecast_weather_lattitude"]
+        params["lon"] = self.config["forecast_weather_longitude"]
+        params["appid"] = self.config["api_key"]
 
         return params
 
@@ -101,7 +101,7 @@ class CurrentWeatherStream(_CurrentWeatherStream):
 
 class ForecastWeatherStream(_ForcastWeatherStream):
     """Define custom stream."""
-    url_base = "https://api.openweathermap.org/data/2.5"
+    url_base = "https://api.openweathermap.org/data/3.0"
     name = "forecast_stream"
     path = "/onecall"
 
@@ -116,6 +116,3 @@ class ForecastWeatherStream(_ForcastWeatherStream):
         Property("hourly", ForecastHourlyObject),
         Property("daily", ForecastDailyObject)
     ).to_dict()
-
-
-
