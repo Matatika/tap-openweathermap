@@ -1,7 +1,7 @@
 """Stream type classes for tap-openweathermap."""
 
 from datetime import datetime
-from typing import Any, Dict, Optional
+from typing import Optional
 from urllib.parse import parse_qsl, urlsplit
 
 from singer_sdk.typing import (
@@ -45,39 +45,7 @@ class _SyncedAtStream(RESTStream):
         return row
 
 
-class _CurrentWeatherStream(_SyncedAtStream):
-    """Define user top items stream."""
-
-    def get_url_params(
-        self, context: Optional[dict], next_page_token: Optional[Any]
-    ) -> Dict[str, Any]:
-        params = super().get_url_params(context, next_page_token)
-        if city_name := self.config.get("current_weather_city_name"):
-            params["q"] = city_name
-        else:
-            params["lat"] = self.config["forecast_weather_lattitude"]
-            params["lon"] = self.config["forecast_weather_longitude"]
-        params["appid"] = self.config["api_key"]
-
-        return params
-
-
-class _ForcastWeatherStream(_SyncedAtStream):
-    """Define user top items stream."""
-    
-    def get_url_params(
-        self, context: Optional[dict], next_page_token: Optional[Any]
-    ) -> Dict[str, Any]:
-        params = super().get_url_params(context, next_page_token)
-        params["lat"] = self.config["forecast_weather_lattitude"]
-        params["lon"] = self.config["forecast_weather_longitude"]
-        params["appid"] = self.config["api_key"]
-
-        return params
-
-
-
-class CurrentWeatherStream(_CurrentWeatherStream):
+class CurrentWeatherStream(_SyncedAtStream):
     """Define custom stream."""
     url_base = "https://api.openweathermap.org/data/2.5"
     name = "current_weather_stream"
@@ -100,10 +68,21 @@ class CurrentWeatherStream(_CurrentWeatherStream):
         Property("name", StringType),
         Property("cod", NumberType),
         ).to_dict()
-    
+
+    def get_url_params(self, context, next_page_token):
+        params = super().get_url_params(context, next_page_token)
+        params["appid"] = self.config["api_key"]
+
+        if city_name := self.config.get("current_weather_city_name"):
+            params["q"] = city_name
+        else:
+            params["lat"] = self.config["forecast_weather_lattitude"]
+            params["lon"] = self.config["forecast_weather_longitude"]
+
+        return params
 
 
-class ForecastWeatherStream(_ForcastWeatherStream):
+class ForecastWeatherStream(_SyncedAtStream):
     """Define custom stream."""
     url_base = "https://api.openweathermap.org/data/3.0"
     name = "forecast_stream"
@@ -120,6 +99,14 @@ class ForecastWeatherStream(_ForcastWeatherStream):
         Property("hourly", ForecastHourlyObject),
         Property("daily", ForecastDailyObject)
     ).to_dict()
+
+    def get_url_params(self, context, next_page_token):
+        params = super().get_url_params(context, next_page_token)
+        params["appid"] = self.config["api_key"]
+        params["lat"] = self.config["forecast_weather_lattitude"]
+        params["lon"] = self.config["forecast_weather_longitude"]
+
+        return params
 
     def response_error_message(self, response):
         return "\n".join(
