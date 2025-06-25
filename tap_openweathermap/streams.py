@@ -52,7 +52,11 @@ class _CurrentWeatherStream(_SyncedAtStream):
         self, context: Optional[dict], next_page_token: Optional[Any]
     ) -> Dict[str, Any]:
         params = super().get_url_params(context, next_page_token)
-        params["q"] = self.config["current_weather_city_name"]
+        if city_name := self.config.get("current_weather_city_name"):
+            params["q"] = city_name
+        else:
+            params["lat"] = self.config["forecast_weather_lattitude"]
+            params["lon"] = self.config["forecast_weather_longitude"]
         params["appid"] = self.config["api_key"]
 
         return params
