@@ -2,33 +2,31 @@
 
 from datetime import datetime
 from typing import Any, Dict, Optional
-from urllib.parse import parse_qsl, urlsplit
 
+from singer_sdk.streams import RESTStream
 from singer_sdk.typing import (
+    DateTimeType,
+    NumberType,
     PropertiesList,
     Property,
-    NumberType,
     StringType,
-    DateTimeType,
-)
-from singer_sdk.streams import RESTStream
-
-from tap_openweathermap.schemas.weather import WeatherObject
-from tap_openweathermap.schemas.forecast_weather import (
-        ForecastCurrentObject,
-        ForecastMinutelyObject,
-        ForecastHourlyObject,
-        ForecastDailyObject,
 )
 
 from tap_openweathermap.schemas.current_weather import (
-        CurrentWeatherCoordObject,
-        CurrentWeatherCloudsObject,
-        CurrentWeatherMainObject,
-        CurrentWeatherRainObject,
-        CurrentWeatherSysObject,
-        CurrentWeatherWindObject,
+    CurrentWeatherCloudsObject,
+    CurrentWeatherCoordObject,
+    CurrentWeatherMainObject,
+    CurrentWeatherRainObject,
+    CurrentWeatherSysObject,
+    CurrentWeatherWindObject,
 )
+from tap_openweathermap.schemas.forecast_weather import (
+    ForecastCurrentObject,
+    ForecastDailyObject,
+    ForecastHourlyObject,
+    ForecastMinutelyObject,
+)
+from tap_openweathermap.schemas.weather import WeatherObject
 
 
 class _SyncedAtStream(RESTStream):
@@ -60,7 +58,7 @@ class _CurrentWeatherStream(_SyncedAtStream):
 
 class _ForcastWeatherStream(_SyncedAtStream):
     """Define user top items stream."""
-    
+
     def get_url_params(
         self, context: Optional[dict], next_page_token: Optional[Any]
     ) -> Dict[str, Any]:
@@ -72,9 +70,9 @@ class _ForcastWeatherStream(_SyncedAtStream):
         return params
 
 
-
 class CurrentWeatherStream(_CurrentWeatherStream):
     """Define custom stream."""
+
     url_base = "https://api.openweathermap.org/data/2.5"
     name = "current_weather_stream"
     path = "/weather"
@@ -95,12 +93,12 @@ class CurrentWeatherStream(_CurrentWeatherStream):
         Property("id", NumberType),
         Property("name", StringType),
         Property("cod", NumberType),
-        ).to_dict()
-    
+    ).to_dict()
 
 
 class ForecastWeatherStream(_ForcastWeatherStream):
     """Define custom stream."""
+
     url_base = "https://api.openweathermap.org/data/3.0"
     name = "forecast_stream"
     path = "/onecall"
@@ -114,7 +112,7 @@ class ForecastWeatherStream(_ForcastWeatherStream):
         Property("current", ForecastCurrentObject),
         Property("minutely", ForecastMinutelyObject),
         Property("hourly", ForecastHourlyObject),
-        Property("daily", ForecastDailyObject)
+        Property("daily", ForecastDailyObject),
     ).to_dict()
 
     def response_error_message(self, response):

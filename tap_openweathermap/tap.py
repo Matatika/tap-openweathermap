@@ -15,8 +15,10 @@ STREAM_TYPES = [
     ForecastWeatherStream,
 ]
 
+
 class TapOpenWeatherMap(Tap):
     """OpenWeatherMap tap class."""
+
     name = "tap-openweathermap"
 
     config_jsonschema = th.PropertiesList(
@@ -24,25 +26,25 @@ class TapOpenWeatherMap(Tap):
             "api_key",
             th.StringType,
             required=True,
-            description="API Key is a required parameter to query the api endpoints"
+            description="API Key is a required parameter to query the api endpoints",
         ),
         th.Property(
             "current_weather_city_name",
             th.StringType,
             required=True,
-            description="City name that you want to get weather for"
+            description="City name that you want to get weather for",
         ),
         th.Property(
             "forecast_weather_longitude",
             th.StringType,
             required=True,
-            description="Longitude of city to get forecast for"
+            description="Longitude of city to get forecast for",
         ),
         th.Property(
             "forecast_weather_lattitude",
             th.StringType,
             required=True,
-            description="Lattitude of city to get forecast for"
+            description="Lattitude of city to get forecast for",
         ),
     ).to_dict()
 
