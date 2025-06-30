@@ -4,29 +4,9 @@ from datetime import datetime
 from typing import Any, Dict, Optional
 
 from singer_sdk.streams import RESTStream
-from singer_sdk.typing import (
-    DateTimeType,
-    NumberType,
-    PropertiesList,
-    Property,
-    StringType,
-)
 
-from tap_openweathermap.schemas.current_weather import (
-    CurrentWeatherCloudsObject,
-    CurrentWeatherCoordObject,
-    CurrentWeatherMainObject,
-    CurrentWeatherRainObject,
-    CurrentWeatherSysObject,
-    CurrentWeatherWindObject,
-)
-from tap_openweathermap.schemas.forecast_weather import (
-    ForecastCurrentObject,
-    ForecastDailyObject,
-    ForecastHourlyObject,
-    ForecastMinutelyObject,
-)
-from tap_openweathermap.schemas.weather import WeatherObject
+from tap_openweathermap.schemas.current_weather import CurrentWeatherObject
+from tap_openweathermap.schemas.forecast_weather import ForecastWeatherObject
 
 
 class _SyncedAtStream(RESTStream):
@@ -76,24 +56,7 @@ class CurrentWeatherStream(_CurrentWeatherStream):
     url_base = "https://api.openweathermap.org/data/2.5"
     name = "current_weather_stream"
     path = "/weather"
-
-    schema = PropertiesList(
-        Property("synced_at", DateTimeType),
-        Property("coord", CurrentWeatherCoordObject),
-        Property("weather", WeatherObject),
-        Property("base", StringType),
-        Property("main", CurrentWeatherMainObject),
-        Property("visibility", NumberType),
-        Property("wind", CurrentWeatherWindObject),
-        Property("rain", CurrentWeatherRainObject),
-        Property("clouds", CurrentWeatherCloudsObject),
-        Property("dt", NumberType),
-        Property("sys", CurrentWeatherSysObject),
-        Property("timezone", NumberType),
-        Property("id", NumberType),
-        Property("name", StringType),
-        Property("cod", NumberType),
-    ).to_dict()
+    schema = CurrentWeatherObject.to_dict()
 
 
 class ForecastWeatherStream(_ForcastWeatherStream):
@@ -103,17 +66,7 @@ class ForecastWeatherStream(_ForcastWeatherStream):
     name = "forecast_stream"
     path = "/onecall"
     extra_retry_statuses = ()
-    schema = PropertiesList(
-        Property("synced_at", DateTimeType),
-        Property("lat", NumberType),
-        Property("lon", NumberType),
-        Property("timezone", StringType),
-        Property("timezone_offset", NumberType),
-        Property("current", ForecastCurrentObject),
-        Property("minutely", ForecastMinutelyObject),
-        Property("hourly", ForecastHourlyObject),
-        Property("daily", ForecastDailyObject),
-    ).to_dict()
+    schema = ForecastWeatherObject.to_dict()
 
     def response_error_message(self, response):
         return "\n".join(

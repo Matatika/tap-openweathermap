@@ -1,20 +1,8 @@
-from singer_sdk.typing import (
-    PropertiesList,
-    Property,
-    ArrayType,
-    NumberType,
-    StringType,
+from singer_sdk import typing as th
+
+WeatherObject = th.PropertiesList(
+    th.Property("id", th.NumberType),
+    th.Property("main", th.StringType),
+    th.Property("description", th.StringType),
+    th.Property("icon", th.StringType),
 )
-
-from tap_openweathermap.schemas.utils.custom_object import CustomObject
-
-
-class WeatherObject(CustomObject):
-    properties = ArrayType(
-        PropertiesList(
-            Property("id", NumberType),
-            Property("main", StringType),
-            Property("description", StringType),
-            Property("icon", StringType),
-        )
-    )
