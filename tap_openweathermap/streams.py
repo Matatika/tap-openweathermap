@@ -1,6 +1,6 @@
 """Stream type classes for tap-openweathermap."""
 
-from datetime import datetime
+import datetime
 from typing import Any, Dict, Optional
 
 from singer_sdk.streams import RESTStream
@@ -14,7 +14,7 @@ class _SyncedAtStream(RESTStream):
 
     records_jsonpath = "$.[*]"
 
-    synced_at = datetime.now(datetime.timezone.utc)
+    synced_at = datetime.datetime.now(datetime.timezone.utc)
 
     def post_process(self, row: dict, context: Optional[dict] = None) -> dict:
         """Apply synced at datetime to stream"""
