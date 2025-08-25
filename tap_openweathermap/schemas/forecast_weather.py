@@ -103,4 +103,17 @@ ForecastWeatherObject = th.PropertiesList(
             )
         ),
     ),
+    th.Property(
+        "alerts",
+        th.ArrayType(
+            th.ObjectType(
+                th.Property("sender_name", th.StringType),
+                th.Property("event", th.StringType),
+                th.Property("start", th.NumberType),
+                th.Property("end", th.NumberType),
+                th.Property("description", th.StringType),
+                th.Property("tags", th.ArrayType(th.StringType)),
+            )
+        ),
+    ),
 )
