@@ -4,6 +4,7 @@ from tap_openweathermap.schemas.weather import WeatherObject
 
 CurrentWeatherObject = th.PropertiesList(
     th.Property("synced_at", th.DateTimeType),
+    th.Property("location_name", th.StringType),
     th.Property(
         "coord",
         th.ObjectType(

@@ -4,7 +4,7 @@ from tap_openweathermap.schemas.weather import WeatherObject
 
 ForecastWeatherObject = th.PropertiesList(
     th.Property("synced_at", th.DateTimeType),
-    th.Property("name", th.StringType),
+    th.Property("location_name", th.StringType),
     th.Property("lat", th.NumberType),
     th.Property("lon", th.NumberType),
     th.Property("timezone", th.StringType),
