@@ -22,7 +22,7 @@ class _SyncedAtStream(RESTStream):
         row["synced_at"] = self.synced_at
 
         # track configured location name
-        row["location_name"] = self.config.get("current_weather_city_name")
+        row["location_name"] = self.config.get("current_weather_city_name", "")
 
         return row
 
