@@ -33,6 +33,10 @@ class _CurrentWeatherStream(_SyncedAtStream):
         params["q"] = self.config["current_weather_city_name"]
         params["appid"] = self.config["api_key"]
 
+        units = self.config.get("forecast_weather_units")
+        if units:
+            params["units"] = units
+
         return params
 
 
