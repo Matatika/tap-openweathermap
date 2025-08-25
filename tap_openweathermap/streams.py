@@ -58,6 +58,10 @@ class _ForcastWeatherStream(_SyncedAtStream):
 
         return params
 
+    def post_process(self, row: dict, context: Optional[dict] = None) -> dict:
+        row["name"] = self.config.get("current_weather_city_name")
+        return super().post_process(row, context)
+
 
 class CurrentWeatherStream(_CurrentWeatherStream):
     """Define custom stream."""
