@@ -14,7 +14,7 @@ class _SyncedAtStream(RESTStream):
 
     records_jsonpath = "$.[*]"
 
-    synced_at = datetime.utcnow()
+    synced_at = datetime.now(datetime.timezone.utc)
 
     def post_process(self, row: dict, context: Optional[dict] = None) -> dict:
         """Apply synced at datetime to stream"""
@@ -33,7 +33,7 @@ class _CurrentWeatherStream(_SyncedAtStream):
         params["q"] = self.config["current_weather_city_name"]
         params["appid"] = self.config["api_key"]
 
-        units = self.config.get("forecast_weather_units")
+        units = self.config.get("weather_units")
         if units:
             params["units"] = units
 
@@ -48,7 +48,7 @@ class _ForcastWeatherStream(_SyncedAtStream):
     ) -> Dict[str, Any]:
         params = super().get_url_params(context, next_page_token)
         
-        units = self.config.get("forecast_weather_units")
+        units = self.config.get("weather_units")
         if units:
             params["units"] = units
         

@@ -47,7 +47,7 @@ class TapOpenWeatherMap(Tap):
             description="Lattitude of city to get forecast for",
         ),
         th.Property(
-            "forecast_weather_units",
+            "weather_units",
             th.StringType,
             required=False,
             description="Units standard (default) or metric",

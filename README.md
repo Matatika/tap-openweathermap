@@ -28,6 +28,8 @@ TAP_OPENWEATHERMAP_FORECAST_WEATHER_LATTITUDE=51.5085
 
 `forecast_weather_lattitude` is required, you need to provide this to get forecast data.
 
+`weather_units` is optional, set units to metric or standard (default)
+
 You can get the longitude and lattitude of a city by requesting its current weather, setting the city name to the `current_weather_city_name` setting.
 The longitude and lattidue will be returned as part of the current_weather_stream. To get the values for your first call just google "city_name" coords.
  
