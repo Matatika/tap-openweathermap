@@ -7,8 +7,13 @@ on:
   push:
     branches: [master]
     paths-ignore: [README.md]
-  pull_request:
+
+  # be careful with this as it allows secret access for fork PR workflow runs
+  # ensure "Require approval for all external contributors" is enabled and PR does not
+  # contain any malicious workflow additions/changes
+  pull_request_target:
     paths-ignore: [README.md]
+
   schedule:
   - cron: 0 9 * * *
 
@@ -24,6 +29,8 @@ jobs:
         python-version: ["3.8", "3.9", "3.10", "3.11"]
     steps:
     - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
