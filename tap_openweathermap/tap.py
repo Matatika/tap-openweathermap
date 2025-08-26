@@ -46,6 +46,12 @@ class TapOpenWeatherMap(Tap):
             required=True,
             description="Lattitude of city to get forecast for",
         ),
+        th.Property(
+            "weather_units",
+            th.StringType,
+            required=False,
+            description="Units standard (default) or metric",
+        )
     ).to_dict()
 
     def discover_streams(self) -> List[Stream]:
