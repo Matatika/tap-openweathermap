@@ -3,21 +3,21 @@ send_anonymous_usage_stats: true
 project_id: f3d940b2-34c0-492b-b078-d594cd79da55
 plugins:
   extractors:
-    - name: tap-openweathermap
-      namespace: tap_openweathermap
-      executable: ./tap-openweathermap.sh
-      capabilities:
-        - state
-        - catalog
-        - discover
-      settings:
-        - name: api_key
-          kind: password
-        - name: current_weather_city_name
-        - name: forecast_weather_longitude
-        - name: forecast_weather_lattitude
-        - name: weather_units
+  - name: tap-openweathermap
+    namespace: tap_openweathermap
+    executable: ./tap-openweathermap.sh
+    capabilities:
+    - state
+    - catalog
+    - discover
+    settings:
+    - name: api_key
+      kind: password
+    - name: current_weather_city_name
+    - name: forecast_weather_longitude
+    - name: forecast_weather_lattitude
+    - name: weather_units
   loaders:
-    - name: target-jsonl
-      variant: andyh1203
-      pip_url: target-jsonl
+  - name: target-jsonl
+    variant: andyh1203
+    pip_url: target-jsonl

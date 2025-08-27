@@ -50,7 +50,8 @@ class TapOpenWeatherMap(Tap):
             "weather_units",
             th.StringType,
             required=False,
-            description="Units standard (default) or metric",
+            allowed_values=["standard", "metric", "imperial"],
+            description="Units to use: standard (default), metric or imperial",
         )
     ).to_dict()
 

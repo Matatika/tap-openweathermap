@@ -32,11 +32,7 @@ class _CurrentWeatherStream(_SyncedAtStream):
         params = super().get_url_params(context, next_page_token)
         params["q"] = self.config["current_weather_city_name"]
         params["appid"] = self.config["api_key"]
-
-        units = self.config.get("weather_units")
-        if units:
-            params["units"] = units
-
+        params["units"] = self.config.get("weather_units")
         return params
 
 
@@ -50,11 +46,7 @@ class _ForcastWeatherStream(_SyncedAtStream):
         params["lat"] = self.config["forecast_weather_lattitude"]
         params["lon"] = self.config["forecast_weather_longitude"]
         params["appid"] = self.config["api_key"]
-
-        units = self.config.get("weather_units")
-        if units:
-            params["units"] = units
-
+        params["units"] = self.config.get("weather_units")
         return params
 
 
