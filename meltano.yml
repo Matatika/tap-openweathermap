@@ -16,6 +16,7 @@ plugins:
     - name: current_weather_city_name
     - name: forecast_weather_longitude
     - name: forecast_weather_lattitude
+    - name: weather_units
   loaders:
   - name: target-jsonl
     variant: andyh1203
