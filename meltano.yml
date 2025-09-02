@@ -13,6 +13,8 @@ plugins:
     - state
     - catalog
     - discover
+    - about
+    - stream-maps
     settings:
     - name: api_key
       kind: password
