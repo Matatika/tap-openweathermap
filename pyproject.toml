@@ -21,7 +21,7 @@ flake8 = "^7.3.0"
 black = "^25.1"
 pydocstyle = "^6.1.1"
 mypy = "^1.18"
-types-requests = "^2.31.0"
+types-requests = "^2.32.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
