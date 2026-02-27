@@ -46,7 +46,7 @@ tap-openweathermap --about
 
 ### Source Authentication and Authorization
 
-To use this tap you require an API key from [https://openweathermap.org/])(https://openweathermap.org/). 
+To use this tap you require an API key from [https://openweathermap.org/](https://openweathermap.org/). 
 
 Sign up for a free account and under your profile you will find your default API Key.
 
