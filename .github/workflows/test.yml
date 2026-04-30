@@ -21,7 +21,6 @@ jobs:
   pytest:
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       TAP_OPENWEATHERMAP_API_KEY: ${{secrets.TAP_OPENWEATHERMAP_API_KEY}}
     strategy:
       fail-fast: false
